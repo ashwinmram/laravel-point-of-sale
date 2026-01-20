@@ -545,16 +545,16 @@
         (function() {
             const posSearchField = document.getElementById('pos_search');
             const searchForm = posSearchField ? posSearchField.closest('form') : null;
-            
+
             if (posSearchField && searchForm) {
                 let scannerTimeout;
-                
+
                 // Auto-focus search field on mobile devices
                 function isMobileDevice() {
                     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
                            (window.innerWidth <= 768);
                 }
-                
+
                 // Handle scanner input (scanners typically send Enter after barcode)
                 posSearchField.addEventListener('keydown', function(e) {
                     if (e.key === 'Enter' || e.keyCode === 13) {
@@ -562,7 +562,7 @@
                         if (scannerTimeout) {
                             clearTimeout(scannerTimeout);
                         }
-                        
+
                         const searchValue = posSearchField.value.trim();
                         if (searchValue) {
                             // Check if this looks like a barcode scan (fast input + Enter)
@@ -574,7 +574,7 @@
                         }
                     }
                 });
-                
+
                 // Handle paste events (some scanners use paste)
                 posSearchField.addEventListener('paste', function(e) {
                     setTimeout(function() {
@@ -585,7 +585,7 @@
                         }
                     }, 50);
                 });
-                
+
                 // Auto-focus on mobile for better scanner experience
                 if (isMobileDevice()) {
                     setTimeout(function() {

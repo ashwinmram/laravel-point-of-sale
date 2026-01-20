@@ -75,7 +75,7 @@
 
                                 <div class="form-group col-md-6">
                                     <label for="barcode_scanner">Barcode Scanner</label>
-                                    <input type="text" class="form-control" id="barcode_scanner" 
+                                    <input type="text" class="form-control" id="barcode_scanner"
                                         placeholder="Scan barcode here (mobile-friendly)" autocomplete="off">
                                     <small class="form-text text-muted">Scan barcode to auto-fill Product Code</small>
                                 </div>
@@ -181,42 +181,42 @@
         (function() {
             const barcodeScanner = document.getElementById('barcode_scanner');
             const codeField = document.getElementById('code');
-            
+
             if (barcodeScanner && codeField) {
                 let scannerTimeout;
-                
+
                 // Auto-focus scanner field on mobile devices
                 function isMobileDevice() {
                     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
                            (window.innerWidth <= 768);
                 }
-                
+
                 if (isMobileDevice()) {
                     // Auto-focus scanner field on mobile after a short delay
                     setTimeout(function() {
                         barcodeScanner.focus();
                     }, 300);
                 }
-                
+
                 // Handle scanner input (scanners typically send Enter after barcode)
                 barcodeScanner.addEventListener('keydown', function(e) {
                     if (e.key === 'Enter' || e.keyCode === 13) {
                         e.preventDefault();
-                        
+
                         const scannedValue = barcodeScanner.value.trim();
                         if (scannedValue) {
                             // Populate code field with scanned value
                             codeField.value = scannedValue;
-                            
+
                             // Visual feedback
                             codeField.classList.add('border-success');
                             setTimeout(function() {
                                 codeField.classList.remove('border-success');
                             }, 1000);
-                            
+
                             // Clear scanner field
                             barcodeScanner.value = '';
-                            
+
                             // Re-focus scanner for next scan
                             if (isMobileDevice()) {
                                 setTimeout(function() {
@@ -226,7 +226,7 @@
                         }
                     }
                 });
-                
+
                 // Handle paste events (some scanners use paste)
                 barcodeScanner.addEventListener('paste', function(e) {
                     setTimeout(function() {

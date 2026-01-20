@@ -18,14 +18,14 @@ class PosControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         // Create permission if it doesn't exist (outside transaction)
         // Using firstOrCreate ensures it only creates if it doesn't exist
         Permission::firstOrCreate(
             ['name' => 'pos.menu'],
             ['group_name' => 'pos']
         );
-        
+
         // Create a role and assign permission (outside transaction)
         $role = Role::firstOrCreate(['name' => 'test-role']);
         if (!$role->hasPermissionTo('pos.menu')) {
@@ -67,9 +67,9 @@ class PosControllerTest extends TestCase
         // POS requires authentication and permission
         // Unauthenticated users get 403 (Forbidden) or redirect to login
         $this->assertTrue(
-            $response->status() === 403 || 
-            $response->status() === 302 ||
-            $response->isRedirect('/login')
+            $response->status() === 403 ||
+                $response->status() === 302 ||
+                $response->isRedirect('/login')
         );
     }
 

@@ -17,14 +17,14 @@ class ProductControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         // Create permission if it doesn't exist (outside transaction)
         // Using firstOrCreate ensures it only creates if it doesn't exist
         Permission::firstOrCreate(
             ['name' => 'product.menu'],
             ['group_name' => 'product']
         );
-        
+
         // Create a role and assign permission (outside transaction)
         $role = Role::firstOrCreate(['name' => 'test-role']);
         if (!$role->hasPermissionTo('product.menu')) {
@@ -344,7 +344,7 @@ class ProductControllerTest extends TestCase
 
         $response->assertOk();
         $response->assertSee($customCode, false);
-        
+
         // Verify the product code is displayed in the readonly input
         $response->assertSee('value="' . $customCode . '"', false);
     }
